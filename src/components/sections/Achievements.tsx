@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ACHIEVEMENTS, type Achievement } from "@/lib/data";
 import { prefersReducedMotion } from "@/lib/hooks";
-import TechLogo from "@/components/ui/TechLogo";
 
 /** Big number that counts up (easeOutQuart, 1.4 s) the first time its card is seen. */
 function CountUp({ a, start }: { a: Achievement; start: boolean }) {
@@ -110,8 +109,6 @@ export default function Achievements() {
     };
   }, [height]);
 
-  const total = String(ACHIEVEMENTS.length).padStart(2, "0");
-
   return (
     <section id="achievements" ref={sectionRef} className="ach" style={{ height: height ?? undefined }} aria-labelledby="ach-title">
       <style>{`
@@ -123,21 +120,16 @@ export default function Achievements() {
         .ach-track { display: flex; gap: 22px; margin-top: clamp(32px, 6vh, 64px); will-change: transform; }
         .ach-track::after { content: ""; flex: 0 0 max(var(--gutter), calc((100vw - 1320px) / 2 + var(--gutter))); }
         .ach-track { padding-left: max(var(--gutter), calc((100vw - 1320px) / 2 + var(--gutter))); }
-        .ach-card { position: relative; flex: 0 0 auto; width: clamp(300px, 40vw, 540px); height: clamp(260px, 36vh, 310px); border-radius: 28px;
+        .ach-card { position: relative; flex: 0 0 auto; width: clamp(300px, 40vw, 540px); min-height: clamp(170px, 22vh, 200px); border-radius: 28px;
           background: var(--card); padding: 24px 26px; display: flex; flex-direction: column;
           box-shadow: inset 0 0 0 1px var(--line), 0 10px 30px -24px rgba(13,13,13,.25);
           transition: transform .7s var(--ease), box-shadow .7s var(--ease); }
         .ach-card.is-focus { transform: translateY(-12px); box-shadow: inset 0 0 0 1px var(--line), 0 40px 70px -34px rgba(13,13,13,.4); }
-        .ach-logo { position: relative; display: grid; place-items: center; width: 72px; height: 72px; border-radius: 20px; background: #fbfaf8;
-          box-shadow: inset 0 0 0 1px var(--line); }
-        .ach-logo::before { content: ""; position: absolute; inset: -10px; border-radius: 30px; background: rgba(13,13,13,.06); filter: blur(14px); opacity: .5;
-          transition: opacity .7s var(--ease); z-index: -1; }
-        .ach-card.is-focus .ach-logo::before { opacity: 1; }
         .ach-num { font-size: clamp(56px, 7vw, 104px); font-weight: 700; letter-spacing: -.06em; line-height: .85; white-space: nowrap; font-variant-numeric: tabular-nums; }
         .ach-num small { font-size: .38em; letter-spacing: -.03em; margin: 0 .06em; vertical-align: .9em; color: var(--mute); }
         .ach-end { flex: 0 0 auto; align-self: center; padding: 0 10px 0 20px; font-size: clamp(26px, 3vw, 40px); font-weight: 700; letter-spacing: -.04em; white-space: nowrap; }
         @media (max-width: 640px) {
-          .ach-card { width: 82vw; height: 330px; padding: 20px; }
+          .ach-card { width: 82vw; min-height: 260px; padding: 20px; }
           .ach-body { flex-direction: column-reverse; align-items: flex-start; gap: 14px; }
           .ach-copy { max-width: none; }
           .ach-num { font-size: 60px; }
@@ -162,14 +154,6 @@ export default function Achievements() {
         <div ref={trackRef} className="ach-track">
           {ACHIEVEMENTS.map((a, i) => (
             <article key={a.caption + a.label} data-card className={`ach-card ${focus === i ? "is-focus" : ""}`} aria-label={`${a.caption} — ${a.label}`}>
-              <div className="flex items-start justify-between">
-                <span className="ach-logo" aria-hidden>
-                  <TechLogo id={a.icon} size={34} />
-                </span>
-                <span className="mono text-[11px] tracking-[.1em] text-mute">
-                  {String(i + 1).padStart(2, "0")} / {total}
-                </span>
-              </div>
               <div className="ach-body mt-auto flex items-end justify-between gap-4">
                 <div className="ach-copy min-w-0 max-w-[58%]">
                   <p className="mono text-[10.5px] uppercase leading-[1.5] tracking-[.12em] text-mute">{a.label}</p>

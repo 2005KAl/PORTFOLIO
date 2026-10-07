@@ -99,13 +99,7 @@ export default function Navigation() {
         .nav-progress { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--ink); transform-origin: 0 50%; transform: scaleX(0); }
         .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 18px; }
         .nav-row > * { pointer-events: auto; }
-        .nav-mark { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%;
-          box-shadow: inset 0 0 0 1.5px var(--ink); font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: .04em;
-          transition: background-color .5s var(--ease), color .5s var(--ease), transform .8s var(--ease); }
-        .nav-mark:hover { transform: rotate(360deg); }
-        .nav.is-scrolled .nav-mark { background: var(--ink); color: #fff; }
-        .nav-name { font-size: 14px; font-weight: 600; letter-spacing: -.02em; transition: opacity .5s var(--ease), transform .5s var(--ease); }
-        .nav.is-scrolled .nav-name { opacity: 0; transform: translateX(-8px); pointer-events: none; }
+        .nav-name { font-size: 14px; font-weight: 600; letter-spacing: -.02em; }
         .nav-pill { position: relative; display: flex; gap: 2px; padding: 5px; border-radius: 999px;
           transition: background-color .5s var(--ease), box-shadow .5s var(--ease), backdrop-filter .5s; }
         .nav.is-scrolled .nav-pill { background: rgba(255,255,255,.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -134,9 +128,6 @@ export default function Navigation() {
         <div ref={progressRef} className="nav-progress" aria-hidden />
         <div className="wrap nav-row">
           <a href="#top" onClick={(e) => go(e, "top")} className="flex items-center gap-3">
-            <span className="nav-mark" aria-hidden>
-              {PROFILE.initials}
-            </span>
             <span className="nav-name">{PROFILE.name}</span>
             <span className="sr-only"> — back to top</span>
           </a>
@@ -173,9 +164,7 @@ export default function Navigation() {
 
       <div id="mobile-menu" className={`nav-overlay ${open ? "is-open" : ""}`} role="dialog" aria-modal="true" aria-label="Menu" aria-hidden={!open}>
         <div className="flex items-center justify-between">
-          <span className="nav-mark" style={{ background: "var(--ink)", color: "#fff" }}>
-            {PROFILE.initials}
-          </span>
+          <span className="nav-name">{PROFILE.name}</span>
           <button className="btn btn-ghost" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
             Close
           </button>

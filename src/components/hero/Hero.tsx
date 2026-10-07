@@ -1,11 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { PROFILE } from "@/lib/data";
 import { scrollToTarget } from "@/lib/scroll";
 
 // The talking-video centrepiece is added in a later phase (PROFILE.heroVideo).
 export default function Hero() {
   const ghost = PROFILE.firstName.toUpperCase();
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setRoleIndex((index) => (index + 1) % PROFILE.roles.length);
+    }, 2800);
+    return () => window.clearInterval(interval);
+  }, []);
 
   return (
     <section id="top" className="hero" aria-labelledby="hero-title">
@@ -23,9 +32,10 @@ export default function Hero() {
         @keyframes spin { to { transform: rotate(360deg); } }
         .hero-in { opacity: 0; transform: translateY(24px); animation: heroIn 1.1s var(--ease) forwards; animation-delay: calc(var(--i) * 90ms + 450ms); }
         @keyframes heroIn { to { opacity: 1; transform: none; } }
-        .hero-rise { transform: translateY(28px); animation: heroRise 1.1s var(--ease) forwards; animation-delay: calc(var(--i) * 90ms + 150ms); }
-        @keyframes heroRise { to { transform: none; } }
-        .hero-focus li + li::before { content: "·"; margin: 0 10px; color: var(--faint); }
+        .hero-role-line { display: block; overflow: hidden; }
+        .hero-role-text { display: block; animation: roleSlideUp .7s var(--ease) both; }
+        .hero-role-line:nth-child(2) .hero-role-text { animation-delay: 80ms; }
+        @keyframes roleSlideUp { from { transform: translateY(110%); } to { transform: translateY(0); } }
         .hero-fact dt { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
         .hero-fact dd { font-size: 14.5px; font-weight: 500; letter-spacing: -.01em; margin-top: 4px; }
         .hero-scroll { position: relative; width: 1px; height: 46px; overflow: hidden; background: rgba(13,13,13,.12); }
@@ -47,18 +57,17 @@ export default function Hero() {
       <div className="wrap relative mt-auto grid gap-10 pb-10 pt-32 md:grid-cols-[1fr_auto] md:items-end md:pb-14">
         <div>
           <h1 id="hero-title" className="h-display text-[clamp(52px,9vw,140px)]">
-            <span className="hero-rise block" style={{ "--i": 1 } as React.CSSProperties}>
-              AI &amp; ML
-            </span>
-            <span className="hero-rise block" style={{ "--i": 2 } as React.CSSProperties}>
-              <em>Engineer.</em>
+            <span key={roleIndex}>
+              <span className="hero-role-line">
+                <span className="hero-role-text font-bold">{PROFILE.roles[roleIndex][0]}</span>
+              </span>
+              <span className="hero-role-line">
+                <span className="hero-role-text">
+                  <em>{PROFILE.roles[roleIndex][1]}</em>
+                </span>
+              </span>
             </span>
           </h1>
-          <ul className="hero-focus hero-in mt-6 flex flex-wrap text-[15px] text-ink-2" style={{ "--i": 3 } as React.CSSProperties}>
-            {PROFILE.focus.map((f) => (
-              <li key={f}>{f}</li>
-            ))}
-          </ul>
           <div className="hero-in mt-8 flex flex-wrap gap-3" style={{ "--i": 4 } as React.CSSProperties}>
             <a
               href="#work"

@@ -49,7 +49,7 @@ export const PROFILE = {
   initials: "KM",
   role: "AI & ML Engineer",
   kicker: "Engineering portfolio",
-  focus: ["Machine Learning", "Data Analytics", "Full-Stack Web", "Software Engineering"],
+  roles: [["AI & ML", "Engineer."], ["Machine", "Learning."], ["Data", "Analytics."], ["Full-Stack", "Developer."], ["Software", "Engineer."]] as const,
   email: "tualasikalaimaha@gmail.com",
   phone: "+91 98405 73695",
   phoneHref: "tel:+919840573695",
