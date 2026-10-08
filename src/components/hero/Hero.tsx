@@ -56,7 +56,7 @@ export default function Hero() {
 
       <div className="wrap relative mt-auto grid gap-10 pb-10 pt-32 md:grid-cols-[1fr_auto] md:items-end md:pb-14">
         <div>
-          <h1 id="hero-title" className="h-display text-[clamp(52px,9vw,140px)]">
+          <h1 id="hero-title" className="h-display text-[clamp(46px,14vw,64px)] md:text-[clamp(64px,9vw,140px)]">
             <span key={roleIndex}>
               <span className="hero-role-line">
                 <span className="hero-role-text font-bold">{PROFILE.roles[roleIndex][0]}</span>

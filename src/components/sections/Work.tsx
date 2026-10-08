@@ -63,9 +63,10 @@ export default function Work() {
           .wk-panel.is-active .wk-plus { transform: rotate(45deg); }
           .wk-open { position: static; display: none; width: auto; grid-template-columns: 1fr; padding: 0 18px 18px; gap: 20px; }
           .wk-panel.is-active .wk-open { display: grid; }
-          .wk-ui { height: 280px; }
+          .wk-ui { height: 340px; }
           .wk-feat { grid-template-columns: 1fr; }
           .wk-title { display: none; }
+          .wk-index { display: none; }
         }
       `}</style>
 
@@ -109,7 +110,7 @@ export default function Work() {
 
                 <div className="wk-open" aria-hidden={!isActive}>
                   <div className="wk-copy flex flex-col">
-                    <p className="mono text-[11px] uppercase tracking-[.14em] text-mute" style={{ "--i": 0 } as React.CSSProperties}>
+                    <p className="wk-index mono text-[11px] uppercase tracking-[.14em] text-mute" style={{ "--i": 0 } as React.CSSProperties}>
                       {p.index}
                     </p>
                     <h3 id={`wk-${p.id}`} className="wk-title h-display mt-4 text-[clamp(30px,3vw,44px)]" style={{ "--i": 1 } as React.CSSProperties}>
@@ -141,7 +142,6 @@ export default function Work() {
                   </div>
                   <div className="wk-ui" aria-hidden>
                     {isActive && UI && <UI />}
-                    <span className="wk-ui-label">Illustrative UI</span>
                   </div>
                 </div>
               </article>

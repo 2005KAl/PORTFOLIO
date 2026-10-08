@@ -121,7 +121,13 @@ export default function Navigation() {
         .nav-overlay.is-open li { opacity: 1; transform: none; transition-delay: calc(150ms + var(--i) * 60ms); }
         .nav-overlay a { display: flex; align-items: baseline; gap: 14px; font-size: clamp(40px, 12vw, 64px); font-weight: 700; letter-spacing: -.045em; line-height: 1.05; }
         .nav-overlay a small { font-family: var(--font-mono); font-size: 12px; font-weight: 400; letter-spacing: 0; color: var(--mute); }
-        @media (max-width: 860px) { .nav-pill { display: none; } .nav-menu-btn { display: inline-flex; align-items: center; } }
+        @media (max-width: 860px) {
+          .nav::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 76px; background: var(--paper); opacity: 0; box-shadow: 0 1px 0 var(--line); transition: opacity .4s var(--ease); }
+          .nav.is-scrolled::before { opacity: .96; }
+          .nav-row { position: relative; padding-top: 16px; }
+          .nav-pill { display: none; }
+          .nav-menu-btn { display: inline-flex; align-items: center; }
+        }
       `}</style>
 
       <nav className={`nav ${scrolled ? "is-scrolled" : ""}`} aria-label="Primary">

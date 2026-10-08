@@ -130,7 +130,7 @@ export default function LanyardCard() {
         .lan-back li span { display: block; margin-top: 1px; font-size: 11.5px; color: var(--mute); }
         .lan-sign { margin-top: auto; border-top: 1px dashed rgba(13,13,13,.2); padding-top: 12px; }
         @media (max-width: 1060px) { .lan { margin-top: 0; } .lan-strap { height: 90px; } }
-        @media (max-width: 360px) { .lan-card { width: 280px; height: 384px; } }
+        @media (max-width: 360px) { .lan-card { width: 280px; } }
       `}</style>
 
       <div ref={swingRef} className="lan-swing">
