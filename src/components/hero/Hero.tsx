@@ -32,7 +32,7 @@ export default function Hero() {
         @keyframes spin { to { transform: rotate(360deg); } }
         .hero-in { opacity: 0; transform: translateY(24px); animation: heroIn 1.1s var(--ease) forwards; animation-delay: calc(var(--i) * 90ms + 450ms); }
         @keyframes heroIn { to { opacity: 1; transform: none; } }
-        .hero-role-line { display: block; overflow: hidden; }
+        .hero-role-line { display: block; overflow: hidden; line-height: 1.16; padding-bottom: .12em; margin-bottom: -.12em; }
         .hero-role-text { display: block; animation: roleSlideUp .7s var(--ease) both; }
         .hero-role-line:nth-child(2) .hero-role-text { animation-delay: 80ms; }
         @keyframes roleSlideUp { from { transform: translateY(110%); } to { transform: translateY(0); } }
@@ -90,7 +90,7 @@ export default function Hero() {
               Let&apos;s talk
             </a>
             <a href={PROFILE.resume} download className="btn btn-ghost">
-              Résumé <span aria-hidden>↓</span>
+              Resume <span aria-hidden>↓</span>
             </a>
           </div>
         </div>

@@ -46,7 +46,7 @@ export default function About() {
           </p>
           <div className="rv mt-8 flex flex-wrap gap-3" style={{ "--i": 4 } as React.CSSProperties}>
             <a href={PROFILE.resume} download className="btn btn-primary">
-              Résumé <span aria-hidden>↓</span>
+              Resume <span aria-hidden>↓</span>
             </a>
             <a href={PROFILE.github} target="_blank" rel="noreferrer" className="btn btn-ghost">
               GitHub <span aria-hidden>↗</span>
